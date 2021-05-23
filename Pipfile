@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+keras = "*"
+tensorflow = "*"
+django = "*"
+numpy = "*"
+pillow = "*"
+django-crispy-forms = "*"
+pytz = "*"
+flask = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
