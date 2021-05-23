@@ -1,18 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Submit an image!</h1>
-    <form action="upload/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <br>
-        <input type="submit" value="Upload">
-    </form>
-    <p>{{ out }}</p>
-    <object datasrc="{{ out }}"></object>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<h2>Not Home</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Infer</th>
+            <th scope="col">View</th>
+            <th scope="col">Image</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for img in images %}
+        <tr>
+            <td scope="row">
+                <form action="{% url 'infer' img.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-md btn-success" value="{{ img.id }}" type="submit">
+                </form>
+
+            </td>
+            <td>
+                <!--view-->
+                <a class="btn btn-md btn-primary" href="{% url 'image' img.id %}">View</a>
+            </td>
+            <td>
+                <!--image-->
+                <p>{{ img.image.url }}</p>
+<!--                <img class="rounded" height="50" alt="image{{ img.id }}"  src="{{ img.image.url }}">-->
+            </td>
+            <td>
+                <!--update-->
+                <a class="btn btn-md btn-warning" href="{% url 'update' img.id %}">Update</a>
+            </td>
+            <td>
+                <!--delete-->
+                <a class="btn btn-md btn-danger" href="{% url 'delete' img.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -5,11 +5,11 @@ from .models import Image
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 # Create your views here.
-def index(request):
+def form(request):
     context = {
         'form': ImageForm(),
     }
-    return render(request, 'index.html', context=context)
+    return render(request, 'form.html', context=context)
 
 def upload(request):
     if request.method == "POST":
@@ -18,6 +18,8 @@ def upload(request):
             id = form.save()
             object = Image.objects.get(pk=id.id).image
             imageURL = FileSystemStorage().url(object)
+            from .inference import runInference
+            prediction = runInference(imageURL)
             context = {
                 'prediction': prediction,
                 'imageurl': imageURL,

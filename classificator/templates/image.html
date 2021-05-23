@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<a class="btn btn-primary" href="{% url 'home' %}">Back</a>
+<h1>{{ file_name }}</h1>
+<img  class="rounded" height="300" src="{{ img_url }}">
+{% endblock %}
